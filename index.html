@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bot Work — Soluções em Tecnologia</title>
+<meta name="description" content="A Bot Work entrega soluções em tecnologia e bots de IA prontos para seu site, WhatsApp e Instagram — coletam informações, interagem com clientes e dão suporte. Automação de atendimento com integrações e governança.">
+
+  <!-- Tipografia moderna: Inter (corpo) + Plus Jakarta Sans (títulos) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root{
+      --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      --font-heading: 'Plus Jakarta Sans', var(--font-sans);
+      --color-bg: #f8fbff;
+      --color-text: #0f1724;
+      --accent-1: #4F46E5;
+      --accent-2: #7C3AED;
+      --accent-3: #2563EB;
+      --glass: rgba(255,255,255,0.68);
+    }
+    html { font-size: 18px; }
+    html,body { font-family: var(--font-sans); background: var(--color-bg); color: var(--color-text); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    h1,h2,h3 { font-family: var(--font-heading); letter-spacing: -0.01em; }
+
+    .btn-primary{
+      background: linear-gradient(90deg,var(--accent-1), var(--accent-2), var(--accent-3));
+      box-shadow: 0 6px 18px rgba(76,29,149,0.12);
+      transition: transform .18s ease, box-shadow .18s ease, opacity .12s ease;
+    }
+    .btn-primary:hover{ transform: translateY(-3px); box-shadow: 0 14px 30px rgba(76,29,149,0.14); }
+    .btn-ghost{ border: 1px solid rgba(15,23,36,0.06); background: transparent; }
+
+    .card-elevate{ transition: transform .18s ease, box-shadow .18s ease; }
+    .card-elevate:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(11,20,36,0.06); }
+
+    .glass-panel{ background: linear-gradient(180deg, rgba(255,255,255,0.72), rgba(255,255,255,0.62)); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(11,20,36,0.04); }
+
+    input, textarea { font-family: var(--font-sans); font-size: 1rem; }
+
+    /* Slot de imagem do herói (16:9) */
+    .hero-image-slot{
+      position: relative; width: 100%; border: 1px solid rgba(15,23,36,0.06);
+      border-radius: 1rem; overflow: hidden; background: #fff;
+      padding-top: 56.25%; /* 16:9 */
+    }
+    .hero-image-slot img{
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    }
+    .hero-image-slot .placeholder{
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      color: #6b7280; font-size: .9rem; padding: 1rem; text-align: center;
+    }
+  </style>
+</head>
+<body class="min-h-screen antialiased">
+  <header class="relative z-30">
+    <nav class="mx-auto max-w-7xl px-6 py-6 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <div class="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-500 shadow-lg">
+          <!-- logo SVG -->
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+            <path d="M4 12c0-4 4-8 8-8s8 4 8 8-4 8-8 8-8-4-8-8z" fill="white" opacity="0.06"/>
+            <path d="M7 12c0-2.761 2.239-5 5-5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 7v10" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <div>
+          <div class="text-xl font-semibold" style="font-family:var(--font-heading)">Bot Work</div>
+          <div class="text-sm text-gray-500">Soluções em Tecnologia</div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <a href="#servicos" class="hidden md:inline-block text-sm font-medium">Serviços</a>
+        <a href="#cases" class="hidden md:inline-block text-sm font-medium">Casos</a>
+        <a href="#contato" class="hidden md:inline-block text-sm font-medium">Contato</a>
+        <a href="#contato" class="inline-flex items-center gap-2 rounded-full btn-primary px-5 py-3 text-white text-sm shadow-md transform transition">Solicitar Orçamento</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="mx-auto max-w-7xl px-6 pb-20">
+    <!-- HERO -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center pt-12">
+      <div>
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight">Bot Work — bots de IA que coletam informações, interagem e dão suporte</h1>
+        <p class="mt-6 text-lg md:text-xl text-gray-600 max-w-2xl">
+          Entregamos seu bot pronto para operar no <strong>site, WhatsApp e Instagram</strong>, treinado com a sua base e integrado aos seus processos.
+          Ele <strong>coleta informações</strong>, <strong>interage com clientes</strong> e pode atuar como <strong>bot de suporte</strong>, reduzindo filas e acelerando respostas.
+        </p>
+
+        <div class="mt-8 flex gap-4">
+          <a href="#contato" class="inline-flex items-center gap-3 rounded-lg bg-gray-900 px-6 py-3 text-white font-semibold shadow-lg transition hover:opacity-95">Fale conosco</a>
+          <a href="#servicos" class="inline-flex items-center gap-3 rounded-lg btn-ghost px-6 py-3 text-sm font-medium">Nossos serviços</a>
+        </div>
+
+        <div class="mt-10 grid grid-cols-2 gap-4 max-w-md">
+          <div class="glass-panel rounded-2xl p-4 shadow-md card-elevate">
+            <div class="text-sm font-semibold text-gray-700">Coleta & Qualificação</div>
+            <div class="mt-2 text-xl font-bold">Leads e dados estruturados</div>
+            <div class="mt-1 text-sm text-gray-600">Perguntas certas, campos validados e envio ao seu CRM.</div>
+          </div>
+          <div class="glass-panel rounded-2xl p-4 shadow-md card-elevate">
+            <div class="text-sm font-semibold text-gray-700">Suporte</div>
+            <div class="mt-2 text-xl font-bold">Respostas rápidas 24/7</div>
+            <div class="mt-1 text-sm text-gray-600">Triagem, base de conhecimento e redução de chamados.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative">
+        <div class="absolute -right-8 -top-8 w-80 h-80 rounded-3xl bg-gradient-to-br from-indigo-600 to-purple-600 opacity-20 blur-3xl transform rotate-12"></div>
+
+        <!-- SLOT PARA IMAGEM DO HERÓI -->
+        <div class="hero-image-slot mb-6">
+          <!-- Substitua via variável HERO_IMAGE_URL no final do arquivo -->
+          <img id="heroImage" src="" alt="Imagem de destaque Bot Work" style="display:none;">
+          <div id="heroPlaceholder" class="placeholder">
+            Espaço para imagem principal (16:9). Defina o endereço em <code>HERO_IMAGE_URL</code> no script ao final.
+          </div>
+        </div>
+
+        <!-- Mock de conversa (mantido) -->
+        <div class="relative rounded-2xl bg-white shadow-2xl overflow-hidden border border-gray-100">
+          <div class="p-6">
+            <div class="flex items-center justify-between">
+              <div class="text-sm font-semibold">Conversa de demonstração</div>
+              <div class="text-xs text-gray-400">Bot Work</div>
+            </div>
+
+            <div class="mt-4 space-y-3">
+              <div class="rounded-xl p-3 bg-gray-100 text-sm">Olá! Como podemos ajudar hoje?</div>
+              <div class="rounded-xl p-3 bg-gradient-to-r from-indigo-600 to-blue-500 text-white text-sm self-end">Quero automatizar o atendimento do meu site.</div>
+              <div class="rounded-xl p-3 bg-gray-100 text-sm">Perfeito — conectamos ao seu site e treinamos o bot para coletar informações e dar suporte.</div>
+            </div>
+
+            <div class="mt-5 flex items-center gap-3">
+              <input type="text" placeholder="Envie uma mensagem..." class="flex-1 rounded-full border border-gray-200 px-4 py-3 text-base focus:outline-none" />
+              <button class="rounded-full btn-primary px-5 py-3 text-white text-base">Enviar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 text-sm text-gray-500">Demonstração estendida: personalização de fluxos, integrações e monitoramento contínuo.</div>
+      </div>
+    </section>
+
+    <!-- SERVIÇOS -->
+    <section id="servicos" class="mt-16">
+      <div class="text-center">
+        <h2 class="text-3xl font-bold">O que fazemos</h2>
+        <p class="mt-2 text-gray-600 max-w-2xl mx-auto">
+          Entrega ponta a ponta: desenho conversacional, implementação, integrações e operação.
+          Bots prontos para <strong>site, WhatsApp e Instagram</strong>, que <strong>coletam informações</strong>, <strong>interagem com clientes</strong> e funcionam como <strong>bot de suporte</strong>.
+        </p>
+      </div>
+
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Card 1 -->
+        <div class="rounded-2xl p-6 bg-white shadow-md border border-gray-100 card-elevate">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center">
+              <!-- IconBot -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2v2" stroke="#4F46E5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="6" y="6" width="12" height="10" rx="2" stroke="#4F46E5" stroke-width="1.6"/>
+                <path d="M8 12h.01M16 12h.01" stroke="#4F46E5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <div class="text-sm font-semibold">Bots Personalizados</div>
+              <div class="mt-2 text-sm text-gray-600">Conversas sob medida para captar dados, qualificar leads e dar suporte.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="rounded-2xl p-6 bg-white shadow-md border border-gray-100 card-elevate">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center">
+              <!-- IconIntegrate -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 12h6" stroke="#4F46E5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M20 12h-6" stroke="#4F46E5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M8 8l-4 4 4 4" stroke="#4F46E5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 8l4 4-4 4" stroke="#4F46E5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <div class="text-sm font-semibold">Integrações & API</div>
+              <div class="mt-2 text-sm text-gray-600">Conexão com site, WhatsApp/Instagram, CRM e sistemas internos.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="rounded-2xl p-6 bg-white shadow-md border border-gray-100 card-elevate">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center">
+              <!-- IconAnalytics -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 3v18h18" stroke="#4F46E5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M7 13v6" stroke="#4F46E5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 7v12" stroke="#4F46E5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M17 10v9" stroke="#4F46E5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <div class="text-sm font-semibold">Operação & Métricas</div>
+              <div class="mt-2 text-sm text-gray-600">Monitoramento, relatórios acionáveis e melhoria contínua.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFÍCIOS -->
+    <section class="mt-12 glass-panel rounded-2xl p-8 shadow-md">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-xl font-bold">Por que escolher a Bot Work</h3>
+          <ul class="mt-4 space-y-3 text-gray-700">
+            <li class="flex items-start gap-3"><span class="mt-1">•</span> Coleta de informações confiável e qualificação de leads.</li>
+            <li class="flex items-start gap-3"><span class="mt-1">•</span> Interações eficazes com clientes nos canais digitais.</li>
+            <li class="flex items-start gap-3"><span class="mt-1">•</span> Suporte inteligente com base de conhecimento e triagem.</li>
+            <li class="flex items-start gap-3"><span class="mt-1">•</span> Governança de dados, segurança e SLAs.</li>
+          </ul>
+        </div>
+        <div class="flex items-center justify-center">
+          <div class="h-44 w-full rounded-xl border border-gray-200 flex items-center justify-center">
+            <div class="text-center text-gray-500">Espaço reservado para print de dashboard ou métricas (opcional).</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CASES -->
+    <section id="cases" class="mt-12">
+      <div class="text-center">
+        <h2 class="text-3xl font-bold">Casos de Sucesso</h2>
+        <p class="mt-2 text-gray-600">Resultados típicos após a implementação de bots Bot Work.</p>
+      </div>
+
+      <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="rounded-2xl p-6 bg-white shadow-md border border-gray-100 card-elevate">
+          <div class="text-sm text-gray-500">Atendimento 24/7</div>
+          <div class="mt-3 text-xl font-bold">-40% em custo de atendimento</div>
+          <div class="mt-2 text-sm text-gray-600">Varejo após integração ao site e roteamento inteligente.</div>
+        </div>
+        <div class="rounded-2xl p-6 bg-white shadow-md border border-gray-100 card-elevate">
+          <div class="text-sm text-gray-500">Geração de Leads</div>
+          <div class="mt-3 text-xl font-bold">+65% em leads qualificados</div>
+          <div class="mt-2 text-sm text-gray-600">Serviços com pré-atendimento automatizado e qualificação.</div>
+        </div>
+        <div class="rounded-2xl p-6 bg-white shadow-md border border-gray-100 card-elevate">
+          <div class="text-sm text-gray-500">Suporte Técnico</div>
+          <div class="mt-3 text-xl font-bold">SLA +30%</div>
+          <div class="mt-2 text-sm text-gray-600">Base de conhecimento e triagem automática.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANOS / PREÇOS -->
+    <section class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Starter -->
+      <div class="rounded-2xl p-6 border border-gray-100 bg-white shadow-md card-elevate">
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="text-sm text-gray-500">Starter</div>
+            <div class="mt-2 text-2xl font-bold">R$ 790/mês</div>
+            <div class="text-xs text-gray-500 mt-1">Setup único: R$ 2.900</div>
+          </div>
+        </div>
+        <ul class="mt-4 space-y-2 text-sm text-gray-600">
+          <li>• 1 canal (site <em>ou</em> WhatsApp)</li>
+          <li>• 1 base de conhecimento</li>
+          <li>• Coleta de informações e leads</li>
+          <li>• Relatórios básicos</li>
+          <li>• Suporte 30 dias</li>
+        </ul>
+        <div class="mt-6">
+          <a href="#contato" class="inline-flex items-center gap-3 rounded-lg btn-primary px-4 py-3 text-white font-semibold shadow">Solicitar Proposta</a>
+        </div>
+      </div>
+
+      <!-- Business -->
+      <div class="rounded-2xl p-6 border-2 border-indigo-600 bg-white shadow-md card-elevate">
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="text-sm text-gray-500">Business</div>
+            <div class="mt-2 text-2xl font-bold">R$ 2.490/mês</div>
+            <div class="text-xs text-gray-500 mt-1">Setup único: R$ 6.900</div>
+          </div>
+          <div class="text-xs bg-indigo-600 text-white rounded-full px-3 py-1">Recomendado</div>
+        </div>
+        <ul class="mt-4 space-y-2 text-sm text-gray-600">
+          <li>• Multicanal (site + WhatsApp/Instagram)</li>
+          <li>• Integrações com CRM/Sheets</li>
+          <li>• Automação, coleta e qualificação de leads</li>
+          <li>• Relatórios avançados</li>
+          <li>• Ajustes e melhoria contínua</li>
+        </ul>
+        <div class="mt-6">
+          <a href="#contato" class="inline-flex items-center gap-3 rounded-lg btn-primary px-4 py-3 text-white font-semibold shadow">Solicitar Proposta</a>
+        </div>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="rounded-2xl p-6 border border-gray-100 bg-white shadow-md card-elevate">
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="text-sm text-gray-500">Enterprise</div>
+            <div class="mt-2 text-2xl font-bold">Sob consulta</div>
+            <div class="text-xs text-gray-500 mt-1">Setup: sob consulta</div>
+          </div>
+        </div>
+        <ul class="mt-4 space-y-2 text-sm text-gray-600">
+          <li>• Segurança e SLAs dedicados</li>
+          <li>• Integrações customizadas</li>
+          <li>• Times e ambientes múltiplos</li>
+          <li>• Acompanhamento estratégico</li>
+        </ul>
+        <div class="mt-6">
+          <a href="#contato" class="inline-flex items-center gap-3 rounded-lg btn-primary px-4 py-3 text-white font-semibold shadow">Solicitar Proposta</a>
+        </div>
+      </div>
+    </section>
+    <p class="mt-2 text-xs text-gray-500">* Custos de mensagens/WhatsApp e de provedores de canal são cobrados à parte conforme política do provedor.</p>
+
+    <!-- CONTATO -->
+    <section id="contato" class="mt-12 bg-gradient-to-r from-white to-white/90 rounded-2xl p-8 shadow-lg">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+        <div>
+          <h3 class="text-2xl font-bold">Vamos conversar</h3>
+          <p class="mt-2 text-gray-600">Conte-nos sobre seu projeto e enviaremos uma proposta sob medida.</p>
+
+          <div class="mt-6 text-sm text-gray-700 space-y-4">
+            <p><strong>Email</strong> botworkbr@Bgmail.com</p>
+            <p><strong>Telefone</strong> +55 (XX) XXXXX-XXXX</p>
+            <p><strong>Local</strong> Brasil (atendimento remoto)</p>
+          </div>
+        </div>
+
+        <form id="contactForm" class="space-y-4" aria-label="Formulário de contato">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input name="name" id="name" placeholder="Nome" required class="w-full rounded-lg border border-gray-200 px-4 py-3 focus:outline-none" />
+            <input name="email" id="email" placeholder="Email" type="email" required class="w-full rounded-lg border border-gray-200 px-4 py-3 focus:outline-none" />
+          </div>
+          <input name="company" id="company" placeholder="Empresa" class="w-full rounded-lg border border-gray-200 px-4 py-3 focus:outline-none" />
+          <textarea name="message" id="message" placeholder="Descreva o projeto" rows="4" class="w-full rounded-lg border border-gray-200 px-4 py-3 focus:outline-none"></textarea>
+          <div class="flex items-center gap-3">
+            <button type="submit" class="rounded-lg btn-primary px-5 py-3 text-white font-semibold shadow">Enviar mensagem</button>
+            <a href="https://wa.me/55XXXXXXXXXXX" class="text-sm font-medium">Ou fale pelo WhatsApp</a>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer class="mt-12 border-t pt-8 pb-12 text-sm text-gray-500">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div>© <span id="year"></span> Bot Work — Todos os direitos reservados</div>
+        <div class="flex gap-4">
+          <a href="#">Privacidade</a>
+          <a href="#">Termos</a>
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    // ALTERE AQUI A IMAGEM DO HERÓI (PÁGINA INICIAL):
+    // Exemplo: const HERO_IMAGE_URL = "https://seu-dominio.com/banner-BotWork.jpg";
+    const HERO_IMAGE_URL = ""; // <-- coloque o link absoluto ou relativo da sua imagem
+    // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    // Ano atual
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Aplicar imagem do herói se definida
+    (function applyHeroImage(){
+      const img = document.getElementById('heroImage');
+      const ph = document.getElementById('heroPlaceholder');
+      if (HERO_IMAGE_URL && typeof HERO_IMAGE_URL === 'string' && HERO_IMAGE_URL.trim().length > 0) {
+        img.src = HERO_IMAGE_URL.trim();
+        img.style.display = 'block';
+        if (ph) ph.style.display = 'none';
+      }
+    })();
+
+    // Formulário -> mailto
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const company = document.getElementById('company').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      const subject = `Solicitação - Bot Work: ${company || name}`;
+      const body = `Nome: ${name}%0AEmail: ${email}%0AEmpresa: ${company}%0A%0AMensagem:%0A${message}`;
+      const mailto = `mailto:botwork@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailto;
+    });
+  </script>
+</body>
+</html>
